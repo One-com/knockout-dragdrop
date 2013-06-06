@@ -1,7 +1,11 @@
 {
-    "name": "knockout-dragdrop",
-    "description": "A drag and drop binding for Knockout",
-    "keywords": ["drag and drop"],
-    "version": "0.1.0",
-    "publishConfig": { "registry": "http://npm.one.com" }
+  "name": "knockout-dragdrop",
+  "description": "A drag and drop binding for Knockout",
+  "keywords": [
+    "drag and drop"
+  ],
+  "version": "0.1.1",
+  "publishConfig": {
+    "registry": "http://npm.one.com"
+  }
 }
