@@ -11,7 +11,7 @@
       "email": "sss@one.com"
     }
   ],
-  "repository": "git://github.com/One-com/knockout.dragdrop.git",
+  "repository": "git://github.com/One-com/knockout-dragdrop.git",
   "publishConfig": {
     "registry": "http://registry.npmjs.com"
   },

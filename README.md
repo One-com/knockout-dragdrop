@@ -1,6 +1,12 @@
-# knockout.dragdrop
+# knockout-dragdrop
 
 A drag and drop binding for Knockout.
+
+## Install
+
+### NPM
+
+`npm install knockout-dragdrop`
 
 ## Usage
 
