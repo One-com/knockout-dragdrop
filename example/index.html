@@ -10,13 +10,13 @@
             <h1>Simple drag and drop between lists</h1>
 
             <h2>Drag from here</h2>
-            <ul data-bind="foreach: source, dropzone: { name: 'target', drop: dropFromTarget }">
-                <li data-bind="text: $data, dragzone: { name: 'source' }"></li>
+            <ul data-bind="foreach: source, dropZone: { name: 'target', drop: dropFromTarget }">
+                <li data-bind="text: $data, dragZone: { name: 'source' }"></li>
             </ul>
 
             <h2>Drop here</h2>
-            <ul data-bind="foreach: target, dropzone: { name: 'source', drop: dropFromSource }">
-                <li data-bind="text: $data, dragzone: { name: 'target' }"></li>
+            <ul data-bind="foreach: target, dropZone: { name: 'source', drop: dropFromSource }">
+                <li data-bind="text: $data, dragZone: { name: 'target' }"></li>
             </ul>
         </div>
 
