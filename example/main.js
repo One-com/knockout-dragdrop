@@ -12,9 +12,13 @@
 			'Aiden'
         ]),
         target: ko.observableArray(),
-        drop: function (data, model) {
+        dropFromSource: function (data, model) {
             model.source.remove(data);
             model.target.push(data);
+        },
+        dropFromTarget: function (data, model) {
+            model.target.remove(data);
+            model.source.push(data);
         }
     };
     ko.applyBindings(model, $('.demo')[0]);

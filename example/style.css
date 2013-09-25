@@ -1,7 +1,18 @@
 ul {
-    border: thin solid grey;
+    border: 1px solid grey;
     min-height: 100px;
     padding: 0;
+}
+ul.drag-over {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.8);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.8);
+
+    background-color: #F4FFDD;
+    -moz-transition: background-color 1s, -moz-transform;
+    -webkit-transition: background-color 1s, -webkit-transform;
+    -o-transition: background-color 1s, -o-transform;
+    transition: background-color 1s, transform;
 }
 li {
     margin: 0;
