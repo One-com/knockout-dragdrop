@@ -1,7 +1,22 @@
+.zones {
+    height: 289px;
+    position: relative;
+}
 ul {
     border: 1px solid grey;
-    min-height: 100px;
     padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+ul.source {
+    right: 51%;
+}
+ul.target {
+    left: 51%;
 }
 ul.drag-over {
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.8);
@@ -9,10 +24,10 @@ ul.drag-over {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.8);
 
     background-color: #F4FFDD;
-    -moz-transition: background-color 1s, -moz-transform;
-    -webkit-transition: background-color 1s, -webkit-transform;
-    -o-transition: background-color 1s, -o-transform;
-    transition: background-color 1s, transform;
+    -moz-transition: all 300ms, -moz-transform;
+    -webkit-transition: all 300ms, -webkit-transform;
+    -o-transition: all 300ms, -o-transform;
+    transition: all 300ms, transform;
 }
 li {
     margin: 0;
@@ -31,4 +46,9 @@ li {
 }
 li:first-child {
     margin-top: 0;
+}
+.customDragElement {
+    background-color: white;
+    border: thin solid gray;
+    padding: 6px 12px;
 }

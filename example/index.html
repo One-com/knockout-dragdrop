@@ -7,17 +7,36 @@
     </head>
     <body>
         <div class="demo">
-            <h1>Simple drag and drop between lists</h1>
+            <div class="simple" data-bind="with: simple">
+                <h1>Simple drag and drop between lists</h1>
 
-            <h2>Drag from here</h2>
-            <ul data-bind="foreach: source, dropZone: { name: 'target', drop: dropFromTarget }">
-                <li data-bind="text: $data, dragZone: { name: 'source' }"></li>
-            </ul>
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'simple.target', drop: dropFromTarget }">
+                        <li data-bind="text: $data, dragZone: { name: 'simple.source' }"></li>
+                    </ul>
 
-            <h2>Drop here</h2>
-            <ul data-bind="foreach: target, dropZone: { name: 'source', drop: dropFromSource }">
-                <li data-bind="text: $data, dragZone: { name: 'target' }"></li>
-            </ul>
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'simple.source', drop: dropFromSource }">
+                        <li data-bind="text: $data, dragZone: { name: 'simple.target' }"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dragElement" data-bind="with: dragElement">
+                <h1>Using a custom drag element</h1>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'dragElement.target', drop: dropFromTarget }">
+                        <li data-bind="text: $data, dragZone: { name: 'dragElement.source', element: 'dragElement' }"></li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'dragElement.source', drop: dropFromSource }">
+                        <li data-bind="text: $data, dragZone: { name: 'dragElement.target', element: 'dragElement' }"></li>
+                    </ul>
+                </div>
+                <script type="text/html" id="dragElement">
+                    <div class="customDragElement">Custom drag element: <span data-bind="text: $data"></span></div>
+                </script>
+            </div>
         </div>
 
         <script src="../vendor/jquery-1.9.1.js"></script>
