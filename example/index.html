@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Knockout.dragdrop Demo</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../lib/knockout.dragdrop.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    </head>
+    <body>
+        <div class="demo">
+            <h1>Simple drag and drop between lists demo</h1>
+
+            <h2>Drag from here</h2>
+            <ul data-bind="foreach: source">
+                <li data-bind="text: $data, dragzone: { name: 'lists' }"></li>
+            </ul>
+
+            <h2>Drop here</h2>
+            <ul data-bind="foreach: target, dropzone: { name: 'lists', drop: drop, data: target }">
+                <li data-bind="text: $data"></li>
+            </ul>
+        </div>
+
+        <script src="../vendor/jquery-1.9.1.js"></script>
+        <script src="../vendor/knockout-2.2.1.js"></script>
+        <script src="../lib/knockout.dragdrop.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
