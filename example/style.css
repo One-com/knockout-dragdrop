@@ -11,6 +11,11 @@ ul {
     left: 0;
     right: 0;
     bottom: 0;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 ul.source {
     right: 51%;
