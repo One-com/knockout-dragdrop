@@ -37,6 +37,32 @@
                     <div class="customDragElement">Custom drag element: <span data-bind="text: $data"></span></div>
                 </script>
             </div>
+
+            <div class="styling" data-bind="with: styling">
+                <h1>Drag styling</h1>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'dragStyling.target', drop: dropFromTarget }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'dragStyling.source',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'dragStyling.source', drop: dropFromSource }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'dragStyling.target',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <script src="../vendor/jquery-1.9.1.js"></script>

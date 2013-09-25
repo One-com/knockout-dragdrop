@@ -52,3 +52,7 @@ li:first-child {
     border: thin solid gray;
     padding: 6px 12px;
 }
+.dragging {
+  opacity: 0.5;
+  filter: "alpha(opacity=50)";
+}
