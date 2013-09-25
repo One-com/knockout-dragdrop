@@ -1,11 +1,20 @@
 {
-  "name": "knockout-dragdrop",
-  "description": "A drag and drop binding for Knockout",
-  "keywords": [
-    "drag and drop"
-  ],
-  "version": "0.1.1",
-  "publishConfig": {
-    "registry": "http://npm.one.com"
-  }
+    "name": "knockout-dragdrop",
+    "description": "A drag and drop binding for Knockout",
+    "version": "0.1.1",
+    "keywords": [
+        "drag and drop"
+    ],
+    "maintainers": [
+        {
+            "name": "Sune Simonsen",
+            "email": "sss@one.com"
+        }
+    ],
+    "repository": "git://github.com/One-com/knockout.dragdrop.git",
+    "publishConfig": {
+        "registry": "http://registry.npmjs.com"
+    },
+    "main": "lib/knockout.dragdrop.js",
+    "licence": "Standard 3-clause BSD"
 }
