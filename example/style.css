@@ -1,4 +1,23 @@
 ul {
     border: thin solid grey;
-    min-height: 50px;
+    min-height: 100px;
+    padding: 0;
+}
+li {
+    margin: 0;
+    margin-top: 1px;
+    list-style-type: none;
+    padding: 8px 16px;
+
+    background: #caea85; /* Old browsers */
+    background: -moz-linear-gradient(top, #caea85 0%, #a0c645 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#caea85), color-stop(100%,#a0c645)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #caea85 0%,#a0c645 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #caea85 0%,#a0c645 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #caea85 0%,#a0c645 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #caea85 0%,#a0c645 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#caea85', endColorstr='#a0c645',GradientType=0 ); /* IE6-9 */
+}
+li:first-child {
+    margin-top: 0;
 }
