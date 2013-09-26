@@ -13,7 +13,7 @@
 
     var model = {
         simple: {
-            source: ko.observableArray(names),
+            source: ko.observableArray([].concat(names)),
             target: ko.observableArray(),
             dropFromSource: function (data, model) {
                 model.source.remove(data);
@@ -26,7 +26,7 @@
         },
 
         dragElement: {
-            source: ko.observableArray(names),
+            source: ko.observableArray([].concat(names)),
             target: ko.observableArray(),
             dropFromSource: function (data, model) {
                 model.source.remove(data);
