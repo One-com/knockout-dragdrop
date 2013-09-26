@@ -1,7 +1,7 @@
 {
-  "name": "knockout-dragdrop",
-  "description": "A drag and drop binding for Knockout",
-  "version": "1.0.0",
+  "name": "knockout-dragdrop-example",
+  "description": "An example of using the knockout-dragdrop binding",
+  "version": "0.0.1",
   "keywords": [
     "drag and drop"
   ],
@@ -12,9 +12,7 @@
     }
   ],
   "repository": "git://github.com/One-com/knockout-dragdrop.git",
-  "publishConfig": {
-    "registry": "http://registry.npmjs.com"
-  },
-  "main": "lib/knockout.dragdrop.js",
+  "private": true,
+  "main": "index.html",
   "licence": "Standard 3-clause BSD"
 }
