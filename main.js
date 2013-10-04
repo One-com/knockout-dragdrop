@@ -81,8 +81,6 @@
                     model.sortable.items.remove(dragData);
                     model.sortable.items.splice(zoneDataIndex, 0, dragData);
                 }
-            },
-            ignore: function () {
             }
         }
 
