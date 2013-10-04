@@ -63,6 +63,27 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="sortable" data-bind="with: sortable">
+                <h1>Sortable</h1>
+
+                <div class="zones">
+                    <ul data-bind="foreach: items">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'sortable',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       },
+                                       dropZone: {
+                                         name: 'sortable',
+                                         dragOver: $parent.reorder,
+                                         drop: $parent.ignore
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <a href="https://github.com/One-com/knockout-dragdrop"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>

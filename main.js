@@ -60,7 +60,32 @@
                 model.target.remove(data);
                 model.source.push(data);
             }
+        },
+
+        sortable: {
+            items: ko.observableArray(ko.utils.arrayMap(names, function (name) {
+                return {
+                    value: name,
+                    dragging: ko.observable(false)
+                };
+            })),
+            dragStart: function (item) {
+                item.dragging(true);
+            },
+            dragEnd: function (item) {
+                item.dragging(false);
+            },
+            reorder: function (event, dragData, zoneData) {
+                if (dragData !== zoneData) {
+                    var zoneDataIndex = model.sortable.items.indexOf(zoneData);
+                    model.sortable.items.remove(dragData);
+                    model.sortable.items.splice(zoneDataIndex, 0, dragData);
+                }
+            },
+            ignore: function () {
+            }
         }
+
     };
     ko.applyBindings(model, $('.demo')[0]);
 }($, ko));
