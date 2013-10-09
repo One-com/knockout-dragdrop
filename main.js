@@ -1,5 +1,14 @@
 /*global $, ko*/
 (function ($, ko) {
+    function toDraggables(values) {
+        return ko.utils.arrayMap(values, function (value) { 
+            return {
+                value: value,
+                dragging: ko.observable(false)
+            };
+        });
+    }
+
     var names = [
         'Declan',
         'Tessa',
@@ -39,12 +48,7 @@
         },
 
         styling: {
-            source: ko.observableArray(ko.utils.arrayMap(names, function (name) {
-                return {
-                    value: name,
-                    dragging: ko.observable(false)
-                };
-            })),
+            source: ko.observableArray(toDraggables(names)),
             target: ko.observableArray(),
             dragStart: function (item) {
                 item.dragging(true);
@@ -62,13 +66,31 @@
             }
         },
 
+        rejectDrop: {
+            source: ko.observableArray(toDraggables(names)),
+            target: ko.observableArray(),
+            dragStart: function (item) {
+                item.dragging(true);
+            },
+            dragEnd: function (item) {
+                item.dragging(false);
+            },
+            dragEnter: function (event, data, model) {
+                var match = data.value.match(/^(a|e|i|o|u|y)/i);
+                return !!match;
+            },
+            dropFromSource: function (data, model) {
+                model.source.remove(data);
+                model.target.push(data);
+            },
+            dropFromTarget: function (data, model) {
+                model.target.remove(data);
+                model.source.push(data);
+            }
+        },
+
         sortable: {
-            items: ko.observableArray(ko.utils.arrayMap(names, function (name) {
-                return {
-                    value: name,
-                    dragging: ko.observable(false)
-                };
-            })),
+            items: ko.observableArray(toDraggables(names)),
             dragStart: function (item) {
                 item.dragging(true);
             },

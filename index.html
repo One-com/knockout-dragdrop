@@ -64,6 +64,33 @@
                 </div>
             </div>
 
+            <div class="reject-drop" data-bind="with: rejectDrop">
+                <h1>Reject drop</h1>
+                <p>You can only drop names starting with a vowel.</p>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'rejectDrop.target', drop: dropFromTarget }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'rejectDrop.source',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'rejectDrop.source', dragEnter: dragEnter, drop: dropFromSource }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'rejectDrop.target',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="sortable" data-bind="with: sortable">
                 <h1>Sortable</h1>
 
@@ -83,6 +110,7 @@
                     </ul>
                 </div>
             </div>
+
         </div>
 
         <a href="https://github.com/One-com/knockout-dragdrop"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
