@@ -50,6 +50,7 @@ ul.drop-rejected {
     border: 1px solid red;
 }
 li {
+    position: relative;
     margin: 0;
     margin-top: 1px;
     list-style-type: none;
@@ -66,6 +67,22 @@ li {
 }
 li:first-child {
     margin-top: 0;
+}
+li .label {
+    margin-left: 6px;
+}
+.drag-handle {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 20px;
+    margin: 6px 0px;
+    background-image: url("images/drag-handle.png");
+    background-repeat: repeat-y;
+    background-position: center center;
+    cursor: move;
+    z-index: 1;
 }
 .customDragElement {
     background-color: white;

@@ -89,6 +89,31 @@
             }
         },
 
+        dragHandles: {
+            source: ko.observableArray(toDraggables(names)),
+            target: ko.observableArray(),
+            dragStart: function (item, event) {
+                var insideDragHandle = $(event.target).closest('.drag-handle').length > 0;
+                if (insideDragHandle) {
+                    item.dragging(true);
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            dragEnd: function (item, event) {
+                item.dragging(false);
+            },
+            dropFromSource: function (data, model) {
+                model.source.remove(data);
+                model.target.push(data);
+            },
+            dropFromTarget: function (data, model) {
+                model.target.remove(data);
+                model.source.push(data);
+            }
+        },
+
         sortable: {
             items: ko.observableArray(toDraggables(names)),
             dragStart: function (item) {

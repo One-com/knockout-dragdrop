@@ -91,6 +91,35 @@
                 </div>
             </div>
 
+            <div class="drag-handles" data-bind="with: dragHandles">
+                <h1>Drag handles</h1>
+                <p>You can only drag the items using the drag handle.</p>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'dragHandles.target', drop: dropFromTarget }">
+                        <li data-bind="css: { dragging: dragging },
+                                       dragZone: { name: 'dragHandles.source',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                            <span class="drag-handle"></span>
+                            <span class="label" data-bind="text: value"></span>
+                        </li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'dragHandles.source', drop: dropFromSource }">
+                        <li data-bind="css: { dragging: dragging },
+                                       dragZone: { name: 'dragHandles.target',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                            <span class="drag-handle"></span>
+                            <span class="label" data-bind="text: value"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="sortable" data-bind="with: sortable">
                 <h1>Sortable</h1>
 

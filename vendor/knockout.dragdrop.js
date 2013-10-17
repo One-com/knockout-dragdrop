@@ -140,8 +140,8 @@
         this.data = args.data;
     }
 
-    Draggable.prototype.startDrag = function () {
-        if (this.dragStart && this.dragStart(this.data) === false) {
+    Draggable.prototype.startDrag = function (event) {
+        if (this.dragStart && this.dragStart(this.data, event) === false) {
             return false;
         }
     };
@@ -200,7 +200,7 @@
         });
 
         if (this.dragEnd) {
-            this.dragEnd(this.data);
+            this.dragEnd(this.data, event);
         }
 
         if (winningDropZone && winningDropZone.drop) {
@@ -338,7 +338,7 @@
                             dragElement = new DragElement(createCloneProxyElement());
                         }
 
-                        if (draggable.startDrag() === false) {
+                        if (draggable.startDrag(downEvent) === false) {
                             return false;
                         }
 
