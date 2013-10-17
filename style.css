@@ -55,6 +55,7 @@ li {
     margin-top: 1px;
     list-style-type: none;
     padding: 8px 16px;
+    height: 20px;
 
     background: #caea85; /* Old browsers */
     background: -moz-linear-gradient(top, #caea85 0%, #a0c645 100%); /* FF3.6+ */
