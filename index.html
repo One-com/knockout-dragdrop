@@ -140,6 +140,26 @@
                 </div>
             </div>
 
+            <div class="scroll-while-dragging" data-bind="with: scrollWhileDragging">
+                <h1>Scroll while dragging</h1>
+
+                <div class="zones">
+                    <ul data-bind="foreach: items, scrollableOnDragOver: 'scroll-while-dragging'">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'scroll-while-dragging',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       },
+                                       dragEvents: {
+                                         name: 'scroll-while-dragging',
+                                         dragOver: $parent.reorder
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
         <a href="https://github.com/One-com/knockout-dragdrop"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>

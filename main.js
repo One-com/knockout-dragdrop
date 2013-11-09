@@ -129,8 +129,24 @@
                     model.sortable.items.splice(zoneDataIndex, 0, dragData);
                 }
             }
-        }
+        },
 
+        scrollWhileDragging: {
+            items: ko.observableArray(toDraggables(names)),
+            dragStart: function (item) {
+                item.dragging(true);
+            },
+            dragEnd: function (item) {
+                item.dragging(false);
+            },
+            reorder: function (event, dragData, zoneData) {
+                if (dragData !== zoneData) {
+                    var zoneDataIndex = model.scrollWhileDragging.items.indexOf(zoneData);
+                    model.scrollWhileDragging.items.remove(dragData);
+                    model.scrollWhileDragging.items.splice(zoneDataIndex, 0, dragData);
+                }
+            }
+        }
     };
     ko.applyBindings(model, $('.demo')[0]);
 }($, ko));

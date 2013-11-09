@@ -94,3 +94,10 @@ li .label {
   opacity: 0.5;
   filter: "alpha(opacity=50)";
 }
+.scroll-while-dragging ul,
+.scroll-while-dragging .zones {
+    height: 150px;
+}
+.scroll-while-dragging ul {
+    overflow: auto;
+}
