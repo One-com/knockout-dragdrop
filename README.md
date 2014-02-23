@@ -2,7 +2,7 @@
 
 A drag and drop binding for Knockout.
 
-[Click here to see an example](http://one-com.github.io/knockout-dragdrop/)
+[Click here to see an example](http://one-com.github.io/knockout-dragdrop/examples/)
 
 ## Install
 

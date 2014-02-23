@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Knockout.dragdrop Demo</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    </head>
+    <body>
+        <div class="demo">
+            <div class="simple" data-bind="with: simple">
+                <h1>Simple drag and drop between lists</h1>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'simple.target', drop: dropFromTarget }">
+                        <li data-bind="text: $data, dragZone: { name: 'simple.source' }"></li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'simple.source', drop: dropFromSource }">
+                        <li data-bind="text: $data, dragZone: { name: 'simple.target' }"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="dragElement" data-bind="with: dragElement">
+                <h1>Using a custom drag element</h1>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'dragElement.target', drop: dropFromTarget }">
+                        <li data-bind="text: $data, dragZone: { name: 'dragElement.source', element: 'dragElement' }"></li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'dragElement.source', drop: dropFromSource }">
+                        <li data-bind="text: $data, dragZone: { name: 'dragElement.target', element: 'dragElement' }"></li>
+                    </ul>
+                </div>
+                <script type="text/html" id="dragElement">
+                    <div class="customDragElement">Custom drag element: <span data-bind="text: $data"></span></div>
+                </script>
+            </div>
+
+            <div class="styling" data-bind="with: styling">
+                <h1>Drag styling</h1>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'dragStyling.target', drop: dropFromTarget }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'dragStyling.source',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'dragStyling.source', drop: dropFromSource }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'dragStyling.target',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reject-drop" data-bind="with: rejectDrop">
+                <h1>Reject drop</h1>
+                <p>You can only drop names starting with a vowel.</p>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'rejectDrop.target', drop: dropFromTarget }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'rejectDrop.source',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'rejectDrop.source', dragEnter: dragEnter, drop: dropFromSource }">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'rejectDrop.target',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="drag-handles" data-bind="with: dragHandles">
+                <h1>Drag handles</h1>
+                <p>You can only drag the items using the drag handle.</p>
+
+                <div class="zones">
+                    <ul class="source" data-bind="foreach: source, dropZone: { name: 'dragHandles.target', drop: dropFromTarget }">
+                        <li data-bind="css: { dragging: dragging },
+                                       dragZone: { name: 'dragHandles.source',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                            <span class="drag-handle"></span>
+                            <span class="label" data-bind="text: value"></span>
+                        </li>
+                    </ul>
+
+                    <ul class="target" data-bind="foreach: target, dropZone: { name: 'dragHandles.source', drop: dropFromSource }">
+                        <li data-bind="css: { dragging: dragging },
+                                       dragZone: { name: 'dragHandles.target',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       }">
+                            <span class="drag-handle"></span>
+                            <span class="label" data-bind="text: value"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sortable" data-bind="with: sortable">
+                <h1>Sortable</h1>
+
+                <div class="zones">
+                    <ul data-bind="foreach: items">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'sortable',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       },
+                                       dragEvents: {
+                                         name: 'sortable',
+                                         dragOver: $parent.reorder
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="scroll-while-dragging" data-bind="with: scrollWhileDragging">
+                <h1>Scroll while dragging</h1>
+
+                <div class="zones">
+                    <ul data-bind="foreach: items, scrollableOnDragOver: 'scroll-while-dragging'">
+                        <li data-bind="text: value,
+                                       css: { dragging: dragging },
+                                       dragZone: { name: 'scroll-while-dragging',
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd
+                                       },
+                                       dragEvents: {
+                                         name: 'scroll-while-dragging',
+                                         dragOver: $parent.reorder
+                                       }">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="https://github.com/One-com/knockout-dragdrop"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+        <script src="vendor/jquery-1.9.1.js"></script>
+        <script src="vendor/knockout-2.2.1.js"></script>
+        <script src="../lib/knockout.dragdrop.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
