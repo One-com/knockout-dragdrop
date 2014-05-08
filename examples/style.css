@@ -101,3 +101,15 @@ li .label {
 .scroll-while-dragging ul {
     overflow: auto;
 }
+
+.drag-zones .zones {
+    height: 300px;
+}
+.drag-zones ul.source.vowels {
+    height: 72px;
+}
+.drag-zones ul.source.consonants {
+    top: auto;
+    bottom: 0;
+    height: 221px;
+}

@@ -1,10 +1,13 @@
 /*global $, ko*/
 (function ($, ko) {
     function toDraggables(values) {
-        return ko.utils.arrayMap(values, function (value) { 
+        return ko.utils.arrayMap(values, function (value) {
             return {
                 value: value,
-                dragging: ko.observable(false)
+                dragging: ko.observable(false),
+                startsWithVowel: function () {
+                    return !!this.value.match(/^(a|e|i|o|u|y)/i);
+                }
             };
         });
     }
@@ -76,8 +79,7 @@
                 item.dragging(false);
             },
             dragEnter: function (event, data, model) {
-                var match = data.value.match(/^(a|e|i|o|u|y)/i);
-                return !!match;
+                return data.startsWithVowel();
             },
             dropFromSource: function (data, model) {
                 model.source.remove(data);
@@ -88,6 +90,36 @@
                 model.source.push(data);
             }
         },
+
+        dragZones: {
+            target: ko.observableArray(),
+            vowels: ko.observableArray(toDraggables(names).filter(function (draggable) {
+                return draggable.startsWithVowel();
+            })),
+            consonants: ko.observableArray(toDraggables(names).filter(function (draggable) {
+                return !draggable.startsWithVowel();
+            })),
+            dragStart: function (item) {
+                item.dragging(true);
+            },
+            dragEnd: function (item) {
+                item.dragging(false);
+            },
+            dropVowel: function (data, model) {
+                model.target.remove(data);
+                model.vowels.push(data);
+            },
+            dropConsonant: function (data, model) {
+                model.target.remove(data);
+                model.consonants.push(data);
+            },
+            dropFromSource: function (data, model) {
+                model.vowels.remove(data);
+                model.consonants.remove(data);
+                model.target.push(data);
+            }
+        },
+
 
         dragHandles: {
             source: ko.observableArray(toDraggables(names)),
