@@ -17,11 +17,11 @@ Dragging between two lists:
 ```html
 <h2>Drag from here</h2>
 <ul data-bind="foreach: source">
-    <li data-bind="text: $data, dragzone: { name: 'lists' }"></li>
+    <li data-bind="text: $data, dragZone: { name: 'lists' }"></li>
 </ul>
 
 <h2>Drop here</h2>
-<ul data-bind="foreach: target, dropzone: { name: 'lists', drop: drop }">
+<ul data-bind="foreach: target, dropZone: { name: 'lists', drop: drop }">
     <li data-bind="text: $data"></li>
 </ul>
 ```
