@@ -21,7 +21,7 @@ Dragging between two lists:
 </ul>
 
 <h2>Drop here</h2>
-<ul data-bind="foreach: target, dropZone: { name: 'lists', drop: drop }">
+<ul data-bind="foreach: target, dropZone: { accepts: 'lists', drop: drop }">
     <li data-bind="text: $data"></li>
 </ul>
 ```
