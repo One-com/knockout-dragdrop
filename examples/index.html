@@ -139,33 +139,42 @@
                 <p>You can only drag the items to the zones where they are accepted. Try to drag the names them back end forth.</p>
 
                 <div class="zones">
-                    <ul class="source vowels" data-bind="foreach: vowels, dropZone: { accepts: 'dragZones.target.vowel', drop: dropVowel }">
+                    <!-- ko with: vowels -->
+                    <ul class="source vowels" data-bind="foreach: items, dropZone: { accepts: 'dragZones.target.vowel', drop: drop }">
                         <li data-bind="text: value,
                                        css: { dragging: dragging },
                                        dragZone: { name: 'dragZones.source.vowel',
                                          dragStart: $parent.dragStart,
-                                         dragEnd: $parent.dragEnd
+                                         dragEnd: $parent.dragEnd,
+                                         data: { items: $parent.items, item: $data }
                                        }">
                         </li>
                     </ul>
-                    <ul class="source consonants" data-bind="foreach: consonants, dropZone: { accepts: 'dragZones.target.consonant', drop: dropConsonant }">
+                    <!-- /ko -->
+                    <!-- ko with: consonants -->
+                    <ul class="source consonants" data-bind="foreach: items, dropZone: { accepts: 'dragZones.target.consonant', drop: drop }">
                         <li data-bind="text: value,
                                        css: { dragging: dragging },
                                        dragZone: { name: 'dragZones.source.consonant',
                                          dragStart: $parent.dragStart,
-                                         dragEnd: $parent.dragEnd
+                                         dragEnd: $parent.dragEnd,
+                                         data: { items: $parent.items, item: $data }
                                        }">
                         </li>
                     </ul>
-                    <ul class="target" data-bind="foreach: target, dropZone: { accepts: ['dragZones.source.vowel', 'dragZones.source.consonant'], drop: dropFromSource }">
+                    <!-- /ko -->
+                    <!-- ko with: target -->
+                    <ul class="target" data-bind="foreach: items, dropZone: { accepts: ['dragZones.source.vowel', 'dragZones.source.consonant'], drop: drop }">
                         <li data-bind="text: value,
                                        css: { dragging: dragging },
                                        dragZone: { name: 'dragZones.target.' + ($data.startsWithVowel() ? 'vowel' : 'consonant' ),
                                          dragStart: $parent.dragStart,
-                                         dragEnd: $parent.dragEnd
+                                         dragEnd: $parent.dragEnd,
+                                         data: { items: $parent.items, item: $data }
                                        }">
                         </li>
                     </ul>
+                    <!-- /ko -->
                 </div>
             </div>
 
@@ -213,7 +222,8 @@
                                        },
                                        dragEvents: {
                                          name: 'sortable',
-                                         dragOver: $parent.reorder
+                                         dragOver: $parent.reorder,
+                                         data: { items: $parent.items, item: $data }
                                        }">
                         </li>
                     </ul>
@@ -234,7 +244,8 @@
                                        },
                                        dragEvents: {
                                          name: 'scroll-while-dragging',
-                                         dragOver: $parent.reorder
+                                         dragOver: $parent.reorder,
+                                         data: { items: $parent.items, item: $data }
                                        }">
                         </li>
                     </ul>

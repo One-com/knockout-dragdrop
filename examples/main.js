@@ -36,214 +36,130 @@
         });
     }
 
+    function extendConstructor(Constructor) {
+        function ExtendedConstructor() {
+            Constructor.apply(this, arguments);
+        }
+        ko.utils.extend(ExtendedConstructor.prototype, Constructor.prototype);
+        return ExtendedConstructor;
+    }
 
-    var model = {
-        simple: {
-            source: ko.observableArray([].concat(names)),
-            target: ko.observableArray(),
-            dropFromSource: function (data, model) {
-                model.source.remove(data);
-                model.target.push(data);
-            },
-            dropFromTarget: function (data, model) {
-                model.target.remove(data);
-                model.source.push(data);
-            }
-        },
-
-        dragElement: {
-            source: ko.observableArray([].concat(names)),
-            target: ko.observableArray(),
-            dropFromSource: function (data, model) {
-                model.source.remove(data);
-                model.target.push(data);
-            },
-            dropFromTarget: function (data, model) {
-                model.target.remove(data);
-                model.source.push(data);
-            }
-        },
-
-        styling: {
-            source: ko.observableArray(toDraggables(names)),
-            target: ko.observableArray(),
-            dragStart: function (item) {
-                item.dragging(true);
-            },
-            dragEnd: function (item) {
-                item.dragging(false);
-            },
-            dropFromSource: function (data, model) {
-                model.source.remove(data);
-                model.target.push(data);
-            },
-            dropFromTarget: function (data, model) {
-                model.target.remove(data);
-                model.source.push(data);
-            }
-        },
-
-        payload: {
-            source: {
-                items: ko.observableArray(toDraggables(names)),
-                drop: function (data, model) {
-                    clearSelection(data.selection);
-                    data.items.removeAll(data.selection);
-                    ko.utils.arrayPushAll(model.items, data.selection);
-                },
-                dragStart: function (data) {
-                    data.selection = getSelectedItems(data.items);
-                    if (!data.item.isSelected()) {
-                        clearSelection(data.selection);
-                        data.item.isSelected(true);
-                        data.selection = [data.item];
-                    }
-                    ko.utils.arrayForEach(data.selection, function (item) {
-                        item.dragging(true);
-                    });
-                },
-                dragEnd: function (data) {
-                    ko.utils.arrayForEach(data.selection, function (item) {
-                        item.dragging(false);
-                    });
-                }
-            },
-            target: {
-                items: ko.observableArray([]),
-                drop: function (data, model) {
-                    clearSelection(data.selection);
-                    data.items.removeAll(data.selection);
-                    ko.utils.arrayPushAll(model.items, data.selection);
-                },
-                dragStart: function (data) {
-                    data.selection = getSelectedItems(data.items);
-                    if (!data.item.isSelected()) {
-                        clearSelection(data.selection);
-                        data.item.isSelected(true);
-                        data.selection = [data.item];
-                    }
-                    ko.utils.arrayForEach(data.selection, function (item) {
-                        item.dragging(true);
-                    });
-                },
-                dragEnd: function (data) {
-                    ko.utils.arrayForEach(data.selection, function (item) {
-                        item.dragging(false);
-                    });
-                }
-            }
-        },
-
-        rejectDrop: {
-            source: ko.observableArray(toDraggables(names)),
-            target: ko.observableArray(),
-            dragStart: function (item) {
-                item.dragging(true);
-            },
-            dragEnd: function (item) {
-                item.dragging(false);
-            },
-            dragEnter: function (event, data, model) {
-                return data.startsWithVowel();
-            },
-            dropFromSource: function (data, model) {
-                model.source.remove(data);
-                model.target.push(data);
-            },
-            dropFromTarget: function (data, model) {
-                model.target.remove(data);
-                model.source.push(data);
-            }
-        },
-
-        dragZones: {
-            target: ko.observableArray(),
-            vowels: ko.observableArray(toDraggables(names).filter(function (draggable) {
-                return draggable.startsWithVowel();
-            })),
-            consonants: ko.observableArray(toDraggables(names).filter(function (draggable) {
-                return !draggable.startsWithVowel();
-            })),
-            dragStart: function (item) {
-                item.dragging(true);
-            },
-            dragEnd: function (item) {
-                item.dragging(false);
-            },
-            dropVowel: function (data, model) {
-                model.target.remove(data);
-                model.vowels.push(data);
-            },
-            dropConsonant: function (data, model) {
-                model.target.remove(data);
-                model.consonants.push(data);
-            },
-            dropFromSource: function (data, model) {
-                model.vowels.remove(data);
-                model.consonants.remove(data);
-                model.target.push(data);
-            }
-        },
+    function DragDropView(items) {
+        items = items || [];
+        this.source = ko.observableArray([].concat(items));
+        this.target = ko.observableArray();
+    }
 
 
-        dragHandles: {
-            source: ko.observableArray(toDraggables(names)),
-            target: ko.observableArray(),
-            dragStart: function (item, event) {
-                var insideDragHandle = $(event.target).closest('.drag-handle').length > 0;
-                if (insideDragHandle) {
-                    item.dragging(true);
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-            dragEnd: function (item, event) {
-                item.dragging(false);
-            },
-            dropFromSource: function (data, model) {
-                model.source.remove(data);
-                model.target.push(data);
-            },
-            dropFromTarget: function (data, model) {
-                model.target.remove(data);
-                model.source.push(data);
-            }
-        },
+    var SimpleView = extendConstructor(DragDropView);
 
-        sortable: {
-            items: ko.observableArray(toDraggables(names)),
-            dragStart: function (item) {
-                item.dragging(true);
-            },
-            dragEnd: function (item) {
-                item.dragging(false);
-            },
-            reorder: function (event, dragData, zoneData) {
-                if (dragData !== zoneData) {
-                    var zoneDataIndex = model.sortable.items.indexOf(zoneData);
-                    model.sortable.items.remove(dragData);
-                    model.sortable.items.splice(zoneDataIndex, 0, dragData);
-                }
-            }
-        },
+    SimpleView.prototype.dropFromSource = function (data, model) {
+        model.source.remove(data);
+        model.target.push(data);
+    };
 
-        scrollWhileDragging: {
-            items: ko.observableArray(toDraggables(names)),
-            dragStart: function (item) {
-                item.dragging(true);
-            },
-            dragEnd: function (item) {
-                item.dragging(false);
-            },
-            reorder: function (event, dragData, zoneData) {
-                if (dragData !== zoneData) {
-                    var zoneDataIndex = model.scrollWhileDragging.items.indexOf(zoneData);
-                    model.scrollWhileDragging.items.remove(dragData);
-                    model.scrollWhileDragging.items.splice(zoneDataIndex, 0, dragData);
-                }
-            }
+    SimpleView.prototype.dropFromTarget = function (data, model) {
+        model.target.remove(data);
+        model.source.push(data);
+    };
+
+    var StylingView = extendConstructor(SimpleView);
+
+    StylingView.prototype.dragStart = function (item) {
+        item.dragging(true);
+    };
+
+    StylingView.prototype.dragEnd = function (item) {
+        item.dragging(false);
+    };
+
+    function DragDropArea(items) {
+        items = items || [];
+        this.items = ko.observableArray([].concat(items));
+    }
+
+    DragDropArea.prototype.dragStart = function (data) {
+        data.selection = getSelectedItems(data.items);
+        if (!data.item.isSelected()) {
+            clearSelection(data.selection);
+            data.item.isSelected(true);
+            data.selection = [data.item];
+        }
+        ko.utils.arrayForEach(data.selection, function (item) {
+            item.dragging(true);
+        });
+    };
+
+    DragDropArea.prototype.dragEnd = function (data) {
+        ko.utils.arrayForEach(data.selection, function (item) {
+            item.dragging(false);
+        });
+    };
+
+    DragDropArea.prototype.drop = function (data, model) {
+        clearSelection(data.selection);
+        data.items.removeAll(data.selection);
+        ko.utils.arrayPushAll(model.items, data.selection);
+    };
+
+    var RejectionView = extendConstructor(StylingView);
+    RejectionView.prototype.dragEnter = function (event, data, model) {
+        return data.startsWithVowel();
+    };
+
+    var DragHandlesView = extendConstructor(StylingView);
+    DragHandlesView.prototype.dragStart = function (item, event) {
+        var insideDragHandle = $(event.target).closest('.drag-handle').length > 0;
+        if (insideDragHandle) {
+            item.dragging(true);
+            return true;
+        } else {
+            return false;
         }
     };
-    ko.applyBindings(model, $('.demo')[0]);
+
+    function SortableView(items) {
+        items = items || [];
+        this.items = ko.observableArray([].concat(items));
+    }
+
+    SortableView.prototype.dragStart = function (item) {
+        item.dragging(true);
+    };
+
+    SortableView.prototype.dragEnd = function (item) {
+        item.dragging(false);
+    };
+
+    SortableView.prototype.reorder = function (event, dragData, zoneData) {
+        if (dragData !== zoneData.item) {
+            var zoneDataIndex = zoneData.items.indexOf(zoneData.item);
+            zoneData.items.remove(dragData);
+            zoneData.items.splice(zoneDataIndex, 0, dragData);
+        }
+    };
+
+    var mainView = {
+        simple: new SimpleView(names),
+        dragElement: new SimpleView(names),
+        styling: new StylingView(toDraggables(names)),
+        payload: {
+            source: new DragDropArea(toDraggables(names)),
+            target: new DragDropArea()
+        },
+        rejectDrop: new RejectionView(toDraggables(names)),
+        dragZones: {
+            vowels: new DragDropArea(toDraggables(names).filter(function (draggable) {
+                return draggable.startsWithVowel();
+            })),
+            consonants: new DragDropArea(toDraggables(names).filter(function (draggable) {
+                return !draggable.startsWithVowel();
+            })),
+            target: new DragDropArea()
+        },
+        dragHandles: new DragHandlesView(toDraggables(names)),
+        sortable: new SortableView(toDraggables(names)),
+        scrollWhileDragging: new SortableView(toDraggables(names))
+    };
+    ko.applyBindings(mainView, $('.demo')[0]);
 }($, ko));
