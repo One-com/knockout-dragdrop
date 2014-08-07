@@ -5,6 +5,7 @@
             return {
                 value: value,
                 dragging: ko.observable(false),
+                isSelected: ko.observable(false),
                 startsWithVowel: function () {
                     return !!this.value.match(/^(a|e|i|o|u|y)/i);
                 }
@@ -22,6 +23,19 @@
         'Camille',
         'Aiden'
     ];
+
+    function getSelectedItems(items) {
+        return ko.utils.arrayFilter(ko.utils.unwrapObservable(items), function (item) {
+            return item.isSelected();
+        });
+    }
+
+    function clearSelection(items) {
+        ko.utils.arrayForEach(ko.utils.unwrapObservable(items), function (item) {
+            item.isSelected(false);
+        });
+    }
+
 
     var model = {
         simple: {
@@ -66,6 +80,57 @@
             dropFromTarget: function (data, model) {
                 model.target.remove(data);
                 model.source.push(data);
+            }
+        },
+
+        payload: {
+            source: {
+                items: ko.observableArray(toDraggables(names)),
+                drop: function (data, model) {
+                    clearSelection(data.selection);
+                    data.items.removeAll(data.selection);
+                    ko.utils.arrayPushAll(model.items, data.selection);
+                },
+                dragStart: function (data) {
+                    data.selection = getSelectedItems(data.items);
+                    if (!data.item.isSelected()) {
+                        clearSelection(data.selection);
+                        data.item.isSelected(true);
+                        data.selection = [data.item];
+                    }
+                    ko.utils.arrayForEach(data.selection, function (item) {
+                        item.dragging(true);
+                    });
+                },
+                dragEnd: function (data) {
+                    ko.utils.arrayForEach(data.selection, function (item) {
+                        item.dragging(false);
+                    });
+                }
+            },
+            target: {
+                items: ko.observableArray([]),
+                drop: function (data, model) {
+                    clearSelection(data.selection);
+                    data.items.removeAll(data.selection);
+                    ko.utils.arrayPushAll(model.items, data.selection);
+                },
+                dragStart: function (data) {
+                    data.selection = getSelectedItems(data.items);
+                    if (!data.item.isSelected()) {
+                        clearSelection(data.selection);
+                        data.item.isSelected(true);
+                        data.selection = [data.item];
+                    }
+                    ko.utils.arrayForEach(data.selection, function (item) {
+                        item.dragging(true);
+                    });
+                },
+                dragEnd: function (data) {
+                    ko.utils.arrayForEach(data.selection, function (item) {
+                        item.dragging(false);
+                    });
+                }
             }
         },
 

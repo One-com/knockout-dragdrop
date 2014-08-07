@@ -7,6 +7,7 @@
     </head>
     <body>
         <div class="demo">
+            <a name="simple"></a>
             <div class="simple" data-bind="with: simple">
                 <h1>Simple drag and drop between lists</h1>
 
@@ -21,6 +22,7 @@
                 </div>
             </div>
 
+            <a name="dragElement"></a>
             <div class="dragElement" data-bind="with: dragElement">
                 <h1>Using a custom drag element</h1>
 
@@ -38,6 +40,7 @@
                 </script>
             </div>
 
+            <a name="styling"></a>
             <div class="styling" data-bind="with: styling">
                 <h1>Drag styling</h1>
 
@@ -64,6 +67,45 @@
                 </div>
             </div>
 
+            <a name="payload"></a>
+            <div class="payload" data-bind="with: payload">
+                <h1>Drag and drop custom data between lists</h1>
+
+                <div class="zones">
+                    <!-- ko with: source -->
+                    <ul class="source" data-bind="foreach: items, dropZone: { accepts: 'payload.target', drop: drop }">
+                        <li data-bind="dragZone: {
+                                         name: 'payload.source',
+                                         data: { items: $parent.items, item: $data },
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd,
+                                         element: 'payload-dragElement'
+                                       }">
+                            <input type="checkbox" data-bind="checked: isSelected"> <span data-bind="text: value"></span>
+                        </li>
+                    </ul>
+                    <!-- /ko -->
+
+                    <!-- ko with: target -->
+                    <ul class="target" data-bind="foreach: items, dropZone: { accepts: 'payload.source', drop: drop }">
+                        <li data-bind="dragZone: {
+                                         name: 'payload.target',
+                                         data: { items: $parent.items, item: $data },
+                                         dragStart: $parent.dragStart,
+                                         dragEnd: $parent.dragEnd,
+                                         element: 'payload-dragElement'
+                                       }">
+                            <input type="checkbox" data-bind="checked: isSelected"> <span data-bind="text: value"></span>
+                        </li>
+                    </ul>
+                    <!-- /ko -->
+                    <script type="text/html" id="payload-dragElement">
+                        <div class="customDragElement">Dragging <span data-bind="text: $data.selection.length"></span> items</div>
+                    </script>
+                </div>
+            </div>
+
+            <a name="reject-drop"></a>
             <div class="reject-drop" data-bind="with: rejectDrop">
                 <h1>Reject drop</h1>
                 <p>You can only drop names starting with a vowel.</p>
@@ -91,6 +133,7 @@
                 </div>
             </div>
 
+            <a name="drag-zones"></a>
             <div class="drag-zones" data-bind="with: dragZones">
                 <h1>Accepted drag zones</h1>
                 <p>You can only drag the items to the zones where they are accepted. Try to drag the names them back end forth.</p>
@@ -126,7 +169,7 @@
                 </div>
             </div>
 
-
+            <a name="drag-handles"></a>
             <div class="drag-handles" data-bind="with: dragHandles">
                 <h1>Drag handles</h1>
                 <p>You can only drag the items using the drag handle.</p>
@@ -156,6 +199,7 @@
                 </div>
             </div>
 
+            <a name="sortable"></a>
             <div class="sortable" data-bind="with: sortable">
                 <h1>Sortable</h1>
 
@@ -176,6 +220,7 @@
                 </div>
             </div>
 
+            <a name="scroll-while-dragging"></a>
             <div class="scroll-while-dragging" data-bind="with: scrollWhileDragging">
                 <h1>Scroll while dragging</h1>
 
