@@ -47,6 +47,16 @@ var model = {
 ko.applyBindings(model);
 ```
 
+## Running the example locally
+
+Run the following command:
+
+```
+npm install && bower install && serve
+```
+
+and open [http://localhost:3000](http://localhost:3000) in your browser.
+
 ## License
 
 Knockout.dragdrop is licensed under a standard 3-clause BSD license -- see the `LICENSE`-file for details.
