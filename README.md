@@ -10,6 +10,10 @@ A drag and drop binding for Knockout.
 
 `npm install knockout-dragdrop`
 
+### Bower
+
+`bower install knockout-dragdrop`
+
 ## Usage
 
 Dragging between two lists:
