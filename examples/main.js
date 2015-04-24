@@ -1,5 +1,24 @@
-/*global $, ko*/
-(function ($, ko) {
+/*global ko*/
+(function (ko) {
+    function matches(element, selector) {
+        if(!element.tagName) {
+            return null;
+        }
+        var docEl = document.documentElement;
+        var match = docEl.matches || docEl.matchesSelector || docEl.webkitMatchesSelector || docEl.mozMatchesSelector || docEl.msMatchesSelector || docEl.oMatchesSelector;
+        return match.call(element, selector);
+    }
+
+    function getClosest(element, selector) {
+        do {
+            if (matches(element, selector)) {
+                return element;
+            }
+            element = element.parentNode;
+        } while (element);
+        return null;
+    }
+
     function toDraggables(values) {
         return ko.utils.arrayMap(values, function (value) {
             return {
@@ -109,7 +128,7 @@
 
     var DragHandlesView = extendConstructor(StylingView);
     DragHandlesView.prototype.dragStart = function (item, event) {
-        var insideDragHandle = $(event.target).closest('.drag-handle').length > 0;
+        var insideDragHandle = getClosest(event.target, '.drag-handle') !== null;
         if (insideDragHandle) {
             item.dragging(true);
             return true;
@@ -161,5 +180,5 @@
         sortable: new SortableView(toDraggables(names)),
         scrollWhileDragging: new SortableView(toDraggables(names))
     };
-    ko.applyBindings(mainView, $('.demo')[0]);
-}($, ko));
+    ko.applyBindings(mainView, document.querySelector('.demo'));
+}(ko));
