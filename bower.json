@@ -20,7 +20,6 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": "2 || >=1.9 <=2",
     "knockout": "3.2 || >=2.2 <=3.2"
   }
 }
