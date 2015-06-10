@@ -221,7 +221,7 @@
                                          dragEnd: $parent.dragEnd
                                        },
                                        dragEvents: {
-                                         name: 'sortable',
+                                         accepts: 'sortable',
                                          dragOver: $parent.reorder,
                                          data: { items: $parent.items, item: $data }
                                        }">
@@ -243,7 +243,7 @@
                                          dragEnd: $parent.dragEnd
                                        },
                                        dragEvents: {
-                                         name: 'scroll-while-dragging',
+                                         accepts: 'scroll-while-dragging',
                                          dragOver: $parent.reorder,
                                          data: { items: $parent.items, item: $data }
                                        }">
