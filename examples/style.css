@@ -94,12 +94,25 @@ li .label {
   opacity: 0.5;
   filter: "alpha(opacity=50)";
 }
-.scroll-while-dragging ul,
+
 .scroll-while-dragging .zones {
     height: 150px;
-}
-.scroll-while-dragging ul {
     overflow: auto;
+}
+
+.scroll-while-dragging .zones {
+    border: 1px solid grey;
+}
+.scroll-while-dragging .zones ul {
+    border: none;
+    box-sizing: border-box;
+    width: 133%;
+}
+.scroll-while-dragging .zones ul li {
+    box-sizing: border-box;
+    width: 19.5%;
+    height: 250px;
+    display: inline-block;
 }
 
 .drag-zones .zones {

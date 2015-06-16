@@ -178,7 +178,12 @@
         },
         dragHandles: new DragHandlesView(toDraggables(names)),
         sortable: new SortableView(toDraggables(names)),
-        scrollWhileDragging: new SortableView(toDraggables(names))
+        scrollWhileDragging: new SortableView(toDraggables(names.concat([
+            'Noah', 'Emma', 'Liam', 'Olivia', 'Mason', 'Sophia',
+            'Jacob', 'Isabella', 'William', 'Ava', 'Ethan', 'Mia',
+            'Michael', 'Emily', 'Alexander', 'Abigail', 'James',
+            'Madison', 'Daniel', 'Charlotte'
+        ])))
     };
     ko.applyBindings(mainView, document.querySelector('.demo'));
 }(ko));

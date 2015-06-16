@@ -234,18 +234,18 @@
             <div class="scroll-while-dragging" data-bind="with: scrollWhileDragging">
                 <h1>Scroll while dragging</h1>
 
-                <div class="zones">
-                    <ul data-bind="foreach: items, scrollableOnDragOver: 'scroll-while-dragging'">
+                <div class="zones" data-bind="scrollableOnDragOver: 'scroll-while-dragging'">
+                    <ul data-bind="foreach: items">
                         <li data-bind="text: value,
                                        css: { dragging: dragging },
                                        dragZone: { name: 'scroll-while-dragging',
-                                         dragStart: $parent.dragStart,
-                                         dragEnd: $parent.dragEnd
+                                       dragStart: $parent.dragStart,
+                                       dragEnd: $parent.dragEnd
                                        },
                                        dragEvents: {
-                                         accepts: 'scroll-while-dragging',
-                                         dragOver: $parent.reorder,
-                                         data: { items: $parent.items, item: $data }
+                                       accepts: 'scroll-while-dragging',
+                                       dragOver: $parent.reorder,
+                                       data: { items: $parent.items, item: $data }
                                        }">
                         </li>
                     </ul>
