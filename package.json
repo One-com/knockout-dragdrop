@@ -14,8 +14,16 @@
   "repository": "git://github.com/One-com/knockout-dragdrop.git",
   "main": "lib/knockout.dragdrop.js",
   "licence": "Standard 3-clause BSD",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha-phantomjs test/index.html"
+  },
   "devDependencies": {
-    "bower": "1.3.12",
-    "serve": "1.4.0"
+    "bower": "1.7.9",
+    "serve": "1.4.0",
+    "mocha": "2.4.5",
+    "mocha-phantomjs": "4.0.2",
+    "unexpected": "10.13.0",
+    "factory.js": "0.0.8",
+    "sinon": "1.17.3"
   }
 }
