@@ -1,7 +1,7 @@
 {
   "name": "knockout-dragdrop",
   "description": "A drag and drop binding for Knockout",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "keywords": [
     "drag and drop"
   ],
